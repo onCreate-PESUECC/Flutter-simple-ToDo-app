@@ -116,6 +116,11 @@ class _TodoListState extends State<TodoList> {
         children: _todos.map((Todo todo) {
           return TodoElement(task: todo, onTodoChanged: _handleChange, onTodoDelete: _handleDeletion,);
         }).toList(),
+        // children: const [
+        //   ListTile(title: Text("Task 1"),),
+        //   ListTile(title: Text("Task 2"),),
+        //   ListTile(title: Text("Task 3"),),
+        // ]
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _displayDialog(),
