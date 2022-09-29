@@ -1,17 +1,19 @@
+// - Widgets
+// - Material App
+// - Scaffold
+// - Column widget
+// - Declare a class of tasks
+// - ListView and List tile widget and customization
+// - List of classes
+// - Finishing a task
+// - Adding a task form
+// - Deleting a task
+
 import 'package:flutter/material.dart';
 import 'item_class.dart';
 
 void main() {
   runApp(const TodoApp());
-}
-
-class TodoItem extends StatelessWidget {
-  const TodoItem({Key? key, required this.todo}) : super(key: key);
-  final Todo todo;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(title: Text(todo.name),);
-  }
 }
 
 class TodoApp extends StatelessWidget {
@@ -35,10 +37,21 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-
-  Todo task1 = Todo(name: "Do laundry",description: "Your clothes stink",status: false,priority: 1);
-  Todo task2 = Todo(name: "Clean your room",description: "Your room also stinks",status: false, priority: 2);
-  Todo task3 = Todo(name: "Take a bath",description: "You stink",status: false, priority: 3);
+  Todo task1 = Todo(
+      name: "Do laundry",
+      description: "Your clothes stink",
+      status: false,
+      priority: 1);
+  Todo task2 = Todo(
+      name: "Clean your room",
+      description: "Your room also stinks",
+      status: false,
+      priority: 2);
+  Todo task3 = Todo(
+      name: "Take a bath",
+      description: "You stink",
+      status: false,
+      priority: 3);
 
   final List<Todo> _todos = <Todo>[];
 
@@ -46,7 +59,7 @@ class _TodoListState extends State<TodoList> {
   final TextEditingController _taskDescription = TextEditingController();
   final TextEditingController _taskPriority = TextEditingController();
 
-  void _handleChange(Todo todo){
+  void _handleChange(Todo todo) {
     setState(() {
       todo.status = !todo.status;
     });
@@ -60,8 +73,12 @@ class _TodoListState extends State<TodoList> {
 
   void _addItem(String name, String desc, String priority) {
     setState(() {
-      _todos.add(Todo(name: name, description: desc, priority: int.parse(priority), status: false));
-      _todos.sort((a,b){
+      _todos.add(Todo(
+          name: name,
+          description: desc,
+          priority: int.parse(priority),
+          status: false));
+      _todos.sort((a, b) {
         return a.priority.compareTo(b.priority);
       });
     });
@@ -71,7 +88,8 @@ class _TodoListState extends State<TodoList> {
   }
 
   Future<void> _displayDialog() async {
-    return showDialog(context: context,
+    return showDialog(
+        context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Add a new task"),
@@ -96,14 +114,13 @@ class _TodoListState extends State<TodoList> {
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    _addItem(_taskName.text, _taskDescription.text, _taskPriority.text);
+                    _addItem(_taskName.text, _taskDescription.text,
+                        _taskPriority.text);
                   },
-                  child: const Text('Add')
-              )
+                  child: const Text('Add'))
             ],
           );
-        }
-    );
+        });
   }
 
   @override
@@ -114,7 +131,11 @@ class _TodoListState extends State<TodoList> {
       ),
       body: ListView(
         children: _todos.map((Todo todo) {
-          return TodoElement(task: todo, onTodoChanged: _handleChange, onTodoDelete: _handleDeletion,);
+          return TodoElement(
+            task: todo,
+            onTodoChanged: _handleChange,
+            onTodoDelete: _handleDeletion,
+          );
         }).toList(),
         // children: const [
         //   ListTile(title: Text("Task 1"),),
@@ -141,30 +162,37 @@ class TodoElement extends StatelessWidget {
   final Todo task;
   final onTodoChanged;
   final onTodoDelete;
-  
-  TextStyle? _getTextStyle(bool checked){
-    if(!checked) return null;
-    
+
+  TextStyle? _getTextStyle(bool checked) {
+    if (!checked) return null;
+
     return const TextStyle(
       color: Colors.black54,
       decoration: TextDecoration.lineThrough,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(task.name, style: _getTextStyle(task.status),),
-      subtitle: Text(task.description, style: _getTextStyle(task.status),),
+      title: Text(
+        task.name,
+        style: _getTextStyle(task.status),
+      ),
+      subtitle: Text(
+        task.description,
+        style: _getTextStyle(task.status),
+      ),
       leading: CircleAvatar(
         child: Text(task.priority.toString()),
       ),
       trailing: IconButton(
         icon: const Icon(Icons.delete),
-        onPressed: (){
+        onPressed: () {
           onTodoDelete(task);
         },
       ),
-      onTap: (){
+      onTap: () {
         onTodoChanged(task);
       },
     );
