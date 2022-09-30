@@ -1,14 +1,3 @@
-// - Widgets
-// - Material App
-// - Scaffold
-// - Column widget
-// - Declare a class of tasks
-// - ListView and List tile widget and customization
-// - List of classes
-// - Finishing a task
-// - Adding a task form
-// - Deleting a task
-
 import 'package:flutter/material.dart';
 import 'item_class.dart';
 
