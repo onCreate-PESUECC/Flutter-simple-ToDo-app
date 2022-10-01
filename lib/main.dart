@@ -26,23 +26,23 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  Todo task1 = Todo(
-      name: "Do laundry",
-      description: "Your clothes stink",
-      status: false,
-      priority: 1);
-  Todo task2 = Todo(
-      name: "Clean your room",
-      description: "Your room also stinks",
-      status: false,
-      priority: 2);
-  Todo task3 = Todo(
-      name: "Take a bath",
-      description: "You stink",
-      status: false,
-      priority: 3);
-
-  final List<Todo> _todos = <Todo>[];
+  final List<Todo> _todos = <Todo>[
+    Todo(
+        name: "Do laundry",
+        description: "Your clothes stink",
+        status: false,
+        priority: 1),
+    Todo(
+        name: "Clean your room",
+        description: "Your room also stinks",
+        status: false,
+        priority: 2),
+    Todo(
+        name: "Take a bath",
+        description: "You stink",
+        status: false,
+        priority: 3)
+  ];
 
   final TextEditingController _taskName = TextEditingController();
   final TextEditingController _taskDescription = TextEditingController();
